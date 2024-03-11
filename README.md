@@ -1,0 +1,2 @@
+# AndroidNoteApp
+Дипломный проект - AndroidNoteApp
