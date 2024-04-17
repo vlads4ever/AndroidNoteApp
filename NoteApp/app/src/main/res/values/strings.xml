@@ -8,4 +8,7 @@
     <string name="enter_note">Enter your record here...</string>
     <string name="confirm_change_button">Confirm change</string>
     <string name="note_title">Record title</string>
+    <string name="menu_search_text">Search</string>
+    <string name="menu_save_text">Save</string>
+    <string name="menu_delete_text">Delete</string>
 </resources>

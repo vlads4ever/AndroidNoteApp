@@ -7,7 +7,7 @@
     tools:context=".presentation.ChangeRecordFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/change_record_card_view"
+        android:id="@+id/changing_record_card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
@@ -22,7 +22,7 @@
             android:padding="16dp">
 
             <EditText
-                android:id="@+id/change_record_title"
+                android:id="@+id/changing_record_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -33,7 +33,7 @@
                 android:textStyle="bold"/>
 
             <EditText
-                android:id="@+id/change_record_body"
+                android:id="@+id/changing_record_body"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start|top"
