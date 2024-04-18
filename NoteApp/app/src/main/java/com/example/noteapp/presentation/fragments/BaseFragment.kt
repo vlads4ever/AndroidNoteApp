@@ -1,4 +1,4 @@
-package com.example.noteapp.presentation
+package com.example.noteapp.presentation.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,12 +16,14 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.noteapp.R
 import com.example.noteapp.databinding.FragmentBaseBinding
 import com.example.noteapp.entity.Note
+import com.example.noteapp.presentation.NoteAdapter
+import com.example.noteapp.presentation.NotesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class BaseFragment : Fragment(), MenuProvider, SearchView.OnQueryTextListener {
     private var _binding: FragmentBaseBinding? = null
-    private val binding = _binding!!
+    private val binding get() = _binding!!
 
     private val viewModel: NotesViewModel by viewModels()
     private lateinit var noteAdapter: NoteAdapter
@@ -40,9 +42,9 @@ class BaseFragment : Fragment(), MenuProvider, SearchView.OnQueryTextListener {
         prepareRecyclerViewAdapter()
 
         viewModel.getNotes().observe(viewLifecycleOwner) { notes ->
-            noteAdapter.setData(notes)
+            noteAdapter.submitList(notes)
 
-            if (notes.isEmpty()) {
+            if (notes.isNotEmpty()) {
                 binding.noRecordCardView.visibility = View.GONE
                 binding.notesRecyclerView.visibility = View.VISIBLE
             } else {
@@ -75,9 +77,9 @@ class BaseFragment : Fragment(), MenuProvider, SearchView.OnQueryTextListener {
         }
     }
 
-    private fun onItemClick(note: Note) {
+    private fun onItemClick(item: Note) {
         val bundle = Bundle().apply {
-            putParcelable(NOTE, note)
+            putParcelable(NOTE, item)
         }
         findNavController()
             .navigate(R.id.action_baseFragment_to_changeRecordFragment, bundle)
@@ -104,7 +106,7 @@ class BaseFragment : Fragment(), MenuProvider, SearchView.OnQueryTextListener {
     private fun searchNote(search: String?) {
         val searchQuery = "%$search%"
         viewModel.searchNote(searchQuery).observe(this) { notes ->
-            noteAdapter.setData(notes)
+            noteAdapter.submitList(notes)
         }
     }
 

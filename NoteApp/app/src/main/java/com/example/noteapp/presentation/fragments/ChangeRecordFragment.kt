@@ -1,4 +1,4 @@
-package com.example.noteapp.presentation
+package com.example.noteapp.presentation.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -15,18 +15,19 @@ import androidx.navigation.fragment.findNavController
 import com.example.noteapp.R
 import com.example.noteapp.databinding.FragmentChangeRecordBinding
 import com.example.noteapp.entity.Note
+import com.example.noteapp.presentation.NotesViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ChangeRecordFragment : Fragment(), MenuProvider {
     private var _binding: FragmentChangeRecordBinding? = null
-    private val binding = _binding!!
+    private val binding get() = _binding!!
 
     private val viewModel: NotesViewModel by viewModels()
 
     private var _note: Note? = null
-    private val note = _note!!
+    private val note get() = _note!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +59,7 @@ class ChangeRecordFragment : Fragment(), MenuProvider {
 
             if (noteTitle.isNotEmpty()) {
                 val newNote = Note(note.id, noteTitle, noteBody)
-                viewModel.changeNote(note)
+                viewModel.changeNote(newNote)
                 Snackbar.make(requireView(), "Record was saved.", Snackbar.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_changeRecordFragment_to_baseFragment)
             } else {

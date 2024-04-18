@@ -1,4 +1,4 @@
-package com.example.noteapp.presentation
+package com.example.noteapp.presentation.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,13 +14,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.noteapp.R
 import com.example.noteapp.databinding.FragmentNewRecordBinding
 import com.example.noteapp.entity.Note
+import com.example.noteapp.presentation.NotesViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NewRecordFragment : Fragment(), MenuProvider {
     private var _binding: FragmentNewRecordBinding? = null
-    private val binding = _binding!!
+    private val binding get() = _binding!!
 
     private val viewModel: NotesViewModel by viewModels()
 

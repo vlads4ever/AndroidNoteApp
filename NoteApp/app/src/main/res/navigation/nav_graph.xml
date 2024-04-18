@@ -7,48 +7,48 @@
 
     <fragment
         android:id="@+id/baseFragment"
-        android:name="com.example.noteapp.presentation.BaseFragment"
+        android:name="com.example.noteapp.presentation.fragments.BaseFragment"
         android:label="fragment_base"
         tools:layout="@layout/fragment_base" >
         <action
             android:id="@+id/action_baseFragment_to_newRecordFragment"
             app:destination="@id/newRecordFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_baseFragment_to_changeRecordFragment"
             app:destination="@id/changeRecordFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_out_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/newRecordFragment"
-        android:name="com.example.noteapp.presentation.NewRecordFragment"
+        android:name="com.example.noteapp.presentation.fragments.NewRecordFragment"
         android:label="fragment_new_record"
         tools:layout="@layout/fragment_new_record" >
         <action
             android:id="@+id/action_newRecordFragment_to_baseFragment"
             app:destination="@id/baseFragment"
-            app:enterAnim="@anim/slide_in_right"
+            app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/changeRecordFragment"
-        android:name="com.example.noteapp.presentation.ChangeRecordFragment"
+        android:name="com.example.noteapp.presentation.fragments.ChangeRecordFragment"
         android:label="fragment_change_record"
         tools:layout="@layout/fragment_change_record" >
         <action
             android:id="@+id/action_changeRecordFragment_to_baseFragment"
             app:destination="@id/baseFragment"
-            app:enterAnim="@anim/slide_in_right"
+            app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_out_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
 </navigation>

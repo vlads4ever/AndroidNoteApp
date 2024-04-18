@@ -2,7 +2,7 @@ package com.example.noteapp
 
 import android.app.Application
 import androidx.room.Room
-import com.example.noteapp.data.NotesDatabase
+import com.example.noteapp.data.db.NotesDatabase
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

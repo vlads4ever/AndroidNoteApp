@@ -2,15 +2,15 @@ package com.example.noteapp.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.noteapp.databinding.RecordCardBinding
 import com.example.noteapp.entity.Note
 
 class NoteAdapter(
     private val onClick: (Note?) -> Unit
-) : RecyclerView.Adapter<NoteHolder>() {
-    private var notes: List<Note> = emptyList()
-
+) : ListAdapter<Note, NoteHolder>(DiffUtilCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder {
         val binding = RecordCardBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -20,23 +20,26 @@ class NoteAdapter(
         return NoteHolder(binding)
     }
 
-    override fun getItemCount(): Int = notes.size
-
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
-        val currentNote = notes[position]
+        val currentNote = getItem(position)
 
         holder.binding.recordCardTitle.text = currentNote.noteTitle
         holder.binding.recordCardBody.text = currentNote.noteBody
 
         holder.binding.root.setOnClickListener {
-            onClick(notes[position])
+            currentNote?.let {
+                onClick(currentNote)
+            }
         }
     }
+}
 
-    fun setData(notesList: List<Note>?) {
-        if (notesList != null) notes = notesList
-        notifyDataSetChanged()
-    }
+class DiffUtilCallback : DiffUtil.ItemCallback<Note>() {
+    override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean =
+        oldItem.id == newItem.id
+
+    override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean =
+        oldItem == newItem
 }
 
 class NoteHolder(val binding: RecordCardBinding) : RecyclerView.ViewHolder(binding.root)
