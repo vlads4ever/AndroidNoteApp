@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
-        android:background="@color/white"
+        android:backgroundTint="@color/yellow_A700"
         app:cardElevation="@dimen/cardview_default_elevation"
         app:cardCornerRadius="@dimen/cardview_default_radius" >
 

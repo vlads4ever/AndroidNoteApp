@@ -18,6 +18,9 @@ import com.example.noteapp.entity.Note
 import com.example.noteapp.presentation.NotesViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @AndroidEntryPoint
 class ChangeRecordFragment : Fragment(), MenuProvider {
@@ -52,13 +55,15 @@ class ChangeRecordFragment : Fragment(), MenuProvider {
 
         binding.changingRecordTitle.setText(note.noteTitle)
         binding.changingRecordBody.setText(note.noteBody)
+        binding.changingRecordDate.text = note.noteData
 
         binding.changeNoteButton.setOnClickListener {
             val noteTitle = binding.changingRecordTitle.text.toString().trim()
             val noteBody = binding.changingRecordBody.text.toString().trim()
+            val currentDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(Date())
 
             if (noteTitle.isNotEmpty()) {
-                val newNote = Note(note.id, noteTitle, noteBody)
+                val newNote = Note(note.id, noteTitle, noteBody, currentDate)
                 viewModel.changeNote(newNote)
                 Snackbar.make(requireView(), "Record was saved.", Snackbar.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_changeRecordFragment_to_baseFragment)

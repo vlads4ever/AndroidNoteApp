@@ -1,5 +1,6 @@
 package com.example.noteapp.presentation.fragments
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,6 +19,11 @@ import com.example.noteapp.entity.Note
 import com.example.noteapp.presentation.NotesViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Date
+import java.util.Locale
 
 @AndroidEntryPoint
 class NewRecordFragment : Fragment(), MenuProvider {
@@ -60,9 +67,10 @@ class NewRecordFragment : Fragment(), MenuProvider {
     private fun saveNote() {
         val noteTitle = binding.recordTitle.text.toString().trim()
         val noteBody = binding.recordBody.text.toString().trim()
+        val currentDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(Date())
 
         if (noteTitle.isNotEmpty()) {
-            val note = Note(0, noteTitle, noteBody)
+            val note = Note(0, noteTitle, noteBody, currentDate)
             viewModel.addNote(note)
             Snackbar.make(requireView(), "Record was saved.", Snackbar.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_newRecordFragment_to_baseFragment)

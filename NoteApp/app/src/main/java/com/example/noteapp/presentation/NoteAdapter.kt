@@ -23,8 +23,11 @@ class NoteAdapter(
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
         val currentNote = getItem(position)
 
-        holder.binding.recordCardTitle.text = currentNote.noteTitle
-        holder.binding.recordCardBody.text = currentNote.noteBody
+        with(holder.binding) {
+            recordCardTitle.text = currentNote.noteTitle
+            recordCardBody.text = currentNote.noteBody
+            recordCardDate.text = currentNote.noteData
+        }
 
         holder.binding.root.setOnClickListener {
             currentNote?.let {

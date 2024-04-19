@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
-        android:background="@color/yellow_500"
+        android:backgroundTint="@color/yellow_A700"
         app:cardElevation="@dimen/cardview_default_elevation"
         app:cardCornerRadius="@dimen/cardview_default_radius">
 
@@ -30,6 +30,15 @@
                 android:textStyle="bold"
                 android:maxLines="1"
                 android:ellipsize="end"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/record_card_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/note_title"
+                android:textColor="@color/gray"
+                android:textSize="15sp"
                 android:layout_marginBottom="16dp"/>
             
             <TextView

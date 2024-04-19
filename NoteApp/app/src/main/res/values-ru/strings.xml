@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NoteApp</string>
+    <string name="no_records_text">Вы не создали еще ни одной записи.</string>
+    <string name="enter_title">Введите заголовок</string>
+    <string name="enter_note">Наберите здесь тестк вашей записи.</string>
+    <string name="confirm_change_button">Подтвердите изменения</string>
+    <string name="note_title">Заголовок</string>
+    <string name="menu_search_text">Поиск</string>
+    <string name="menu_save_text">Сохранить</string>
+    <string name="menu_delete_text">Удалить</string>
+</resources>

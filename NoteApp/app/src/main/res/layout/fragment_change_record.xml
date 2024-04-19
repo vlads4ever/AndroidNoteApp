@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
-        android:background="@color/white"
+        android:backgroundTint="@color/yellow_A700"
         app:cardElevation="@dimen/cardview_default_elevation"
         app:cardCornerRadius="@dimen/cardview_default_radius" >
 
@@ -31,6 +31,15 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/changing_record_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/note_title"
+                android:textColor="@color/gray"
+                android:textSize="15sp"
+                android:layout_marginBottom="16dp"/>
 
             <EditText
                 android:id="@+id/changing_record_body"

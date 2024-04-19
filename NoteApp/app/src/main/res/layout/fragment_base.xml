@@ -19,7 +19,7 @@
         android:visibility="visible"
         android:layout_gravity="center"
         android:layout_margin="32dp"
-        android:backgroundTint="?attr/colorOnPrimary"
+        android:backgroundTint="@color/yellow_500"
         app:cardElevation="@dimen/cardview_default_elevation"
         app:cardCornerRadius="@dimen/cardview_default_radius"
         app:layout_constraintBottom_toTopOf="@+id/add_note_button"
