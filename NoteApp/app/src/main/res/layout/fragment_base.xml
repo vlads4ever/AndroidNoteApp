@@ -48,7 +48,7 @@
         android:backgroundTint="?attr/colorPrimary"
         android:clickable="true"
         android:focusable="true"
-        android:contentDescription="@string/add_note_button_title"
+        android:contentDescription="@string/add_record_button_description"
         android:tintMode="?attr/colorOnPrimary"
         android:src="@drawable/add_note_icon"
         app:fabSize="normal"

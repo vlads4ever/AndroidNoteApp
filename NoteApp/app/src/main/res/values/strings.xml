@@ -1,14 +1,22 @@
 <resources>
     <string name="app_name">NoteApp</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="add_note_button_title">Add Record Button</string>
+    <string name="add_record_button_description">Add Record</string>
     <string name="no_records_text">You haven\'t created any records yet.</string>
     <string name="enter_title">Enter title</string>
-    <string name="enter_note">Enter your record here...</string>
-    <string name="confirm_change_button">Confirm change</string>
-    <string name="note_title">Record title</string>
+    <string name="enter_record">Enter your record here...</string>
+    <string name="confirm_change_button_description">Confirm change</string>
+    <string name="record_date_text">Record date</string>
     <string name="menu_search_text">Search</string>
     <string name="menu_save_text">Save</string>
     <string name="menu_delete_text">Delete</string>
+    <string name="button_delete_text">DELETE</string>
+    <string name="button_cancel_text">CANCEL</string>
+    <string name="button_confirm_text">CONFIRM</string>
+    <string name="notification_delete_title">Record deleting</string>
+    <string name="notification_delete_body">Confirm deleting please</string>
+    <string name="notification_saved_record">Record was saved.</string>
+    <string name="notification_no_title">No title specified!</string>
+    <string name="choose_color_button_desc">Choose color</string>
+    <string name="notification_color_title">Choose note color</string>
 </resources>

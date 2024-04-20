@@ -1,6 +1,7 @@
 package com.example.noteapp.presentation.fragments
 
 import android.app.AlertDialog
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -56,19 +57,29 @@ class ChangeRecordFragment : Fragment(), MenuProvider {
         binding.changingRecordTitle.setText(note.noteTitle)
         binding.changingRecordBody.setText(note.noteBody)
         binding.changingRecordDate.text = note.noteData
+        binding.changingRecordCardView.setCardBackgroundColor(note.noteColor)
 
         binding.changeNoteButton.setOnClickListener {
             val noteTitle = binding.changingRecordTitle.text.toString().trim()
             val noteBody = binding.changingRecordBody.text.toString().trim()
             val currentDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(Date())
+            val noteColor = binding.changingRecordCardView.cardBackgroundColor.defaultColor
 
             if (noteTitle.isNotEmpty()) {
-                val newNote = Note(note.id, noteTitle, noteBody, currentDate)
+                val newNote = Note(note.id, noteTitle, noteBody, currentDate, noteColor)
                 viewModel.changeNote(newNote)
-                Snackbar.make(requireView(), "Record was saved.", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(
+                    requireView(),
+                    getString(R.string.notification_saved_record),
+                    Snackbar.LENGTH_SHORT
+                ).show()
                 findNavController().navigate(R.id.action_changeRecordFragment_to_baseFragment)
             } else {
-                Snackbar.make(requireView(), "No title specified!", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(
+                    requireView(),
+                    getString(R.string.notification_no_title),
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -93,13 +104,13 @@ class ChangeRecordFragment : Fragment(), MenuProvider {
 
     private fun deleteNote() {
         AlertDialog.Builder(requireContext()).apply {
-            setTitle("Record deleting")
-            setMessage("Confirm deleting please")
-            setPositiveButton("DELETE") { _, _ ->
+            setTitle(getString(R.string.notification_delete_title))
+            setMessage(getString(R.string.notification_delete_body))
+            setPositiveButton(getString(R.string.button_delete_text)) { _, _ ->
                 viewModel.deleteNote(note)
                 findNavController().navigate(R.id.action_changeRecordFragment_to_baseFragment)
             }
-            setNegativeButton("CANCEL", null)
+            setNegativeButton(getString(R.string.button_cancel_text), null)
         }.create().show()
     }
 

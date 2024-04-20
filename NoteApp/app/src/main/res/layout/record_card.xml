@@ -7,10 +7,11 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/record_card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
-        android:backgroundTint="@color/yellow_A700"
+        app:cardBackgroundColor="@color/yellow_100"
         app:cardElevation="@dimen/cardview_default_elevation"
         app:cardCornerRadius="@dimen/cardview_default_radius">
 
@@ -24,7 +25,7 @@
                 android:id="@+id/record_card_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/note_title"
+                android:text="@string/record_date_text"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -36,9 +37,10 @@
                 android:id="@+id/record_card_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/note_title"
+                android:text="@string/record_date_text"
                 android:textColor="@color/gray"
-                android:textSize="15sp"
+                android:textSize="13sp"
+                android:textStyle="italic"
                 android:layout_marginBottom="16dp"/>
             
             <TextView

@@ -1,5 +1,6 @@
 package com.example.noteapp.presentation
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -27,6 +28,7 @@ class NoteAdapter(
             recordCardTitle.text = currentNote.noteTitle
             recordCardBody.text = currentNote.noteBody
             recordCardDate.text = currentNote.noteData
+            recordCardView.setCardBackgroundColor(currentNote.noteColor)
         }
 
         holder.binding.root.setOnClickListener {

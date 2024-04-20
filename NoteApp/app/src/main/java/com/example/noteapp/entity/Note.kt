@@ -17,5 +17,7 @@ data class Note(
     @ColumnInfo(name = "noteBody")
     val noteBody: String,
     @ColumnInfo(name = "noteData")
-    val noteData: String
+    val noteData: String,
+    @ColumnInfo(name = "noteColor")
+    val noteColor: Int
 ) : Parcelable

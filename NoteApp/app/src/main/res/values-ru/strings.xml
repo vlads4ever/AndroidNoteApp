@@ -3,10 +3,20 @@
     <string name="app_name">NoteApp</string>
     <string name="no_records_text">Вы не создали еще ни одной записи.</string>
     <string name="enter_title">Введите заголовок</string>
-    <string name="enter_note">Наберите здесь тестк вашей записи.</string>
-    <string name="confirm_change_button">Подтвердите изменения</string>
-    <string name="note_title">Заголовок</string>
+    <string name="enter_record">Наберите здесь текст вашей записи.</string>
+    <string name="notification_delete_title">Удаление записи</string>
+    <string name="notification_delete_body">Подтвердите удаление, пожалуйста</string>
+    <string name="button_delete_text">УДАЛИТЬ</string>
+    <string name="button_cancel_text">ОТМЕНА</string>
+    <string name="notification_saved_record">Запись сохранена.</string>
+    <string name="notification_no_title">Не указан заголовок!</string>
+    <string name="add_record_button_description">Добавить запись</string>
+    <string name="confirm_change_button_description">Подтвердите изменения</string>
+    <string name="record_date_text">Дата записи</string>
     <string name="menu_search_text">Поиск</string>
     <string name="menu_save_text">Сохранить</string>
     <string name="menu_delete_text">Удалить</string>
+    <string name="choose_color_button_desc">Кнопка выбора цвета</string>
+    <string name="notification_color_title">Выберите цвет заметки</string>
+    <string name="button_confirm_text">ПОДТВЕРДИТЬ</string>
 </resources>
