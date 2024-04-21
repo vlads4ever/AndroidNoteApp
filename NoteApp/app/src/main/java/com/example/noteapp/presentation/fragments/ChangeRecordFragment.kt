@@ -14,6 +14,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.noteapp.R
+import com.example.noteapp.databinding.ColorChangeBinding
 import com.example.noteapp.databinding.FragmentChangeRecordBinding
 import com.example.noteapp.entity.Note
 import com.example.noteapp.presentation.NotesViewModel
@@ -32,10 +33,6 @@ class ChangeRecordFragment : Fragment(), MenuProvider {
 
     private var _note: Note? = null
     private val note get() = _note!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +55,26 @@ class ChangeRecordFragment : Fragment(), MenuProvider {
         binding.changingRecordBody.setText(note.noteBody)
         binding.changingRecordDate.text = note.noteData
         binding.changingRecordCardView.setCardBackgroundColor(note.noteColor)
+
+        binding.changingColorButton.setOnClickListener {
+            AlertDialog.Builder(requireContext()).apply {
+                setTitle(getString(R.string.notification_color_title))
+                val colorBinding = ColorChangeBinding.inflate(layoutInflater)
+                setView(colorBinding.root)
+                setPositiveButton(getString(R.string.button_confirm_text), null)
+                setNegativeButton(getString(R.string.button_cancel_text), null)
+                colorBinding.colorRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+                    when(checkedId) {
+                        R.id.yellow_radio_button -> binding.changingRecordCardView
+                            .setCardBackgroundColor(resources.getColor(R.color.yellow_100))
+                        R.id.green_radio_button -> binding.changingRecordCardView
+                            .setCardBackgroundColor(resources.getColor(R.color.green_100))
+                        R.id.blue_radio_button -> binding.changingRecordCardView
+                            .setCardBackgroundColor(resources.getColor(R.color.blue_100))
+                    }
+                }
+            }.create().show()
+        }
 
         binding.changeNoteButton.setOnClickListener {
             val noteTitle = binding.changingRecordTitle.text.toString().trim()

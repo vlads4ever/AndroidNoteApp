@@ -41,7 +41,7 @@ class BaseFragment : Fragment(), MenuProvider, SearchView.OnQueryTextListener {
 
         prepareRecyclerViewAdapter()
 
-        viewModel.getNotes().observe(viewLifecycleOwner) { notes ->
+        viewModel.notes().observe(viewLifecycleOwner) { notes ->
             noteAdapter.submitList(notes)
 
             if (notes.isNotEmpty()) {
@@ -105,7 +105,7 @@ class BaseFragment : Fragment(), MenuProvider, SearchView.OnQueryTextListener {
 
     private fun searchNote(search: String?) {
         val searchQuery = "%$search%"
-        viewModel.searchNote(searchQuery).observe(this) { notes ->
+        viewModel.searchNotes(searchQuery).observe(this) { notes ->
             noteAdapter.submitList(notes)
         }
     }

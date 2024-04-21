@@ -1,8 +1,9 @@
 package com.example.noteapp.presentation
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.noteapp.data.Repository
 import com.example.noteapp.domain.AddNoteUseCase
 import com.example.noteapp.domain.ChangeNoteUseCase
 import com.example.noteapp.domain.DeleteNoteUseCase
@@ -37,7 +38,7 @@ class NotesViewModel @Inject constructor(
             changeNoteUseCase.execute(note)
         }
 
-    fun getNotes() = getNotesUseCase.execute()
+    fun notes() = getNotesUseCase.execute()
 
-    fun searchNote(search: String?) = searchNoteUseCase.execute(search)
+    fun searchNotes(search: String?) = searchNoteUseCase.execute(search)
 }
