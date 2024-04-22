@@ -19,4 +19,5 @@
     <string name="notification_no_title">No title specified!</string>
     <string name="choose_color_button_desc">Choose color</string>
     <string name="notification_color_title">Choose note color</string>
+    <string name="record_title_text">Record title</string>
 </resources>

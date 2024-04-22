@@ -25,7 +25,7 @@
                 android:id="@+id/record_card_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/record_date_text"
+                android:text="@string/record_title_text"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"

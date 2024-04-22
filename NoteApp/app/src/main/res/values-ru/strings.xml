@@ -19,4 +19,5 @@
     <string name="choose_color_button_desc">Кнопка выбора цвета</string>
     <string name="notification_color_title">Выберите цвет заметки</string>
     <string name="button_confirm_text">ПОДТВЕРДИТЬ</string>
+    <string name="record_title_text">Заголовок записи</string>
 </resources>
