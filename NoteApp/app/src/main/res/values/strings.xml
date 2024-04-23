@@ -1,23 +1,39 @@
 <resources>
     <string name="app_name">NoteApp</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="add_record_button_description">Add Record</string>
+    <string name="add_record_button_description">Add record</string>
+    <string name="add_folder_button_description">Add folder</string>
+    <string name="back_button_description">Back to folders</string>
     <string name="no_records_text">You haven\'t created any records yet.</string>
+    <string name="no_folders_text">You haven\'t created any folders yet.</string>
     <string name="enter_title">Enter title</string>
-    <string name="enter_record">Enter your record here...</string>
+    <string name="enter_record">Enter your record here</string>
+    <string name="enter_folder_title">Enter folder name</string>
     <string name="confirm_change_button_description">Confirm change</string>
     <string name="record_date_text">Record date</string>
     <string name="menu_search_text">Search</string>
-    <string name="menu_save_text">Save</string>
-    <string name="menu_delete_text">Delete</string>
+    <string name="menu_save_text">Save record</string>
+    <string name="menu_delete_text">Delete record</string>
+    <string name="menu_delete_folder_text">Delete folder</string>
     <string name="button_delete_text">DELETE</string>
     <string name="button_cancel_text">CANCEL</string>
     <string name="button_confirm_text">CONFIRM</string>
-    <string name="notification_delete_title">Record deleting</string>
+    <string name="notification_record_delete_title">Current record deleting</string>
+    <string name="notification_folder_delete_title">Current folder deleting</string>
     <string name="notification_delete_body">Confirm deleting please</string>
     <string name="notification_saved_record">Record was saved.</string>
+    <string name="notification_saved_folder">Folder was saved.</string>
+    <string name="notification_delete_record">Record was deleted.</string>
+    <string name="notification_delete_folder">Folder was deleted.</string>
     <string name="notification_no_title">No title specified!</string>
     <string name="choose_color_button_desc">Choose color</string>
     <string name="notification_color_title">Choose note color</string>
     <string name="record_title_text">Record title</string>
+    <string name="folder_image_text">Folder image</string>
+    <string name="folder_title_text">Folder title</string>
+    <string name="rename_folder_title">Rename folder</string>
+    <string name="type_folder_name_hint">Folder name</string>
+    <string name="yellow_text">Yellow</string>
+    <string name="green_text">Green</string>
+    <string name="blue_text">Blue</string>
 </resources>

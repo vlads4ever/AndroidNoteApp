@@ -1,7 +1,6 @@
 package com.example.noteapp.presentation.fragments
 
 import android.app.AlertDialog
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.noteapp.R
 import com.example.noteapp.databinding.ColorChangeBinding
 import com.example.noteapp.databinding.FragmentChangeRecordBinding
+import com.example.noteapp.entity.Folder
 import com.example.noteapp.entity.Note
 import com.example.noteapp.presentation.NotesViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -34,6 +34,9 @@ class ChangeRecordFragment : Fragment(), MenuProvider {
     private var _note: Note? = null
     private val note get() = _note!!
 
+    private var _currentFolder: Folder? = null
+    private val currentFolder get() = _currentFolder!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,11 +48,12 @@ class ChangeRecordFragment : Fragment(), MenuProvider {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.let {
-            _note = it.getParcelable(NOTE)!!
-        }
-
         activity?.addMenuProvider(this, viewLifecycleOwner)
+
+        arguments?.let {
+            _note = it.getParcelable(NOTE)
+            _currentFolder = it.getParcelable(FOLDER)
+        }
 
         binding.changingRecordTitle.setText(note.noteTitle)
         binding.changingRecordBody.setText(note.noteBody)
@@ -57,53 +61,39 @@ class ChangeRecordFragment : Fragment(), MenuProvider {
         binding.changingRecordCardView.setCardBackgroundColor(note.noteColor)
 
         binding.changingColorButton.setOnClickListener {
-            AlertDialog.Builder(requireContext()).apply {
-                setTitle(getString(R.string.notification_color_title))
-                val colorBinding = ColorChangeBinding.inflate(layoutInflater)
-                setView(colorBinding.root)
-                setPositiveButton(getString(R.string.button_confirm_text), null)
-                setNegativeButton(getString(R.string.button_cancel_text), null)
-                colorBinding.colorRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-                    when(checkedId) {
-                        R.id.yellow_radio_button -> binding.changingRecordCardView
-                            .setCardBackgroundColor(resources.getColor(R.color.yellow_100))
-                        R.id.green_radio_button -> binding.changingRecordCardView
-                            .setCardBackgroundColor(resources.getColor(R.color.green_100))
-                        R.id.blue_radio_button -> binding.changingRecordCardView
-                            .setCardBackgroundColor(resources.getColor(R.color.blue_100))
-                    }
-                }
-            }.create().show()
+            prepareColorChangeDialog()
         }
 
         binding.changeNoteButton.setOnClickListener {
-            val noteTitle = binding.changingRecordTitle.text.toString().trim()
-            val noteBody = binding.changingRecordBody.text.toString().trim()
-            val currentDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(Date())
-            val noteColor = binding.changingRecordCardView.cardBackgroundColor.defaultColor
-
-            if (noteTitle.isNotEmpty()) {
-                val newNote = Note(note.id, noteTitle, noteBody, currentDate, noteColor)
-                viewModel.changeNote(newNote)
-                Snackbar.make(
-                    requireView(),
-                    getString(R.string.notification_saved_record),
-                    Snackbar.LENGTH_SHORT
-                ).show()
-                findNavController().navigate(R.id.action_changeRecordFragment_to_baseFragment)
-            } else {
-                Snackbar.make(
-                    requireView(),
-                    getString(R.string.notification_no_title),
-                    Snackbar.LENGTH_SHORT
-                ).show()
-            }
+            changeNote()
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun prepareColorChangeDialog() {
+        AlertDialog.Builder(requireContext()).apply {
+            setTitle(getString(R.string.notification_color_title))
+            val colorBinding = ColorChangeBinding.inflate(layoutInflater)
+            setView(colorBinding.root)
+            setPositiveButton(getString(R.string.button_confirm_text), null)
+            setNegativeButton(getString(R.string.button_cancel_text), null)
+            colorBinding.colorRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+                when (checkedId) {
+                    R.id.yellow_radio_button -> binding.changingRecordCardView
+                        .setCardBackgroundColor(resources.getColor(R.color.yellow_100))
+
+                    R.id.green_radio_button -> binding.changingRecordCardView
+                        .setCardBackgroundColor(resources.getColor(R.color.green_100))
+
+                    R.id.blue_radio_button -> binding.changingRecordCardView
+                        .setCardBackgroundColor(resources.getColor(R.color.blue_100))
+                }
+            }
+        }.create().show()
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -119,13 +109,50 @@ class ChangeRecordFragment : Fragment(), MenuProvider {
         return false
     }
 
+    private fun changeNote() {
+        val noteTitle = binding.changingRecordTitle.text.toString().trim()
+        val noteBody = binding.changingRecordBody.text.toString().trim()
+        val currentDate = SimpleDateFormat(PATTERN, Locale.getDefault()).format(Date())
+        val noteColor = binding.changingRecordCardView.cardBackgroundColor.defaultColor
+
+        if (noteTitle.isNotEmpty()) {
+            val newNote = Note(note.id, note.folderId, noteTitle, noteBody, currentDate, noteColor)
+            viewModel.changeNote(newNote)
+            Snackbar.make(
+                requireView(),
+                getString(R.string.notification_saved_record),
+                Snackbar.LENGTH_SHORT
+            ).show()
+            val bundle = Bundle().apply {
+                putParcelable(FOLDER, currentFolder)
+            }
+            findNavController()
+                .navigate(R.id.action_changeRecordFragment_to_notesListFragment, bundle)
+        } else {
+            Snackbar.make(
+                requireView(),
+                getString(R.string.notification_no_title),
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+    }
+
     private fun deleteNote() {
         AlertDialog.Builder(requireContext()).apply {
-            setTitle(getString(R.string.notification_delete_title))
+            setTitle(getString(R.string.notification_record_delete_title))
             setMessage(getString(R.string.notification_delete_body))
             setPositiveButton(getString(R.string.button_delete_text)) { _, _ ->
                 viewModel.deleteNote(note)
-                findNavController().navigate(R.id.action_changeRecordFragment_to_baseFragment)
+                val bundle = Bundle().apply {
+                    putParcelable(FOLDER, currentFolder)
+                }
+                Snackbar.make(
+                    requireView(),
+                    getString(R.string.notification_delete_record),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                findNavController()
+                    .navigate(R.id.action_changeRecordFragment_to_notesListFragment, bundle)
             }
             setNegativeButton(getString(R.string.button_cancel_text), null)
         }.create().show()
@@ -133,6 +160,8 @@ class ChangeRecordFragment : Fragment(), MenuProvider {
 
     companion object {
         private const val NOTE = "note"
+        private const val FOLDER = "folder"
+        private const val PATTERN = "dd.MM.yyyy"
     }
 
 }

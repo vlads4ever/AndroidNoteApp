@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.fragments.BaseFragment">
+    tools:context=".presentation.fragments.FoldersListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notes_recycler_view"
+        android:id="@+id/folders_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/no_record_card_view"
+        android:id="@+id/no_folder_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible"
@@ -22,25 +22,25 @@
         android:backgroundTint="@color/yellow_500"
         app:cardElevation="@dimen/cardview_default_elevation"
         app:cardCornerRadius="@dimen/cardview_default_radius"
-        app:layout_constraintBottom_toTopOf="@+id/add_note_button"
+        app:layout_constraintBottom_toTopOf="@+id/add_folder_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
         <TextView
-            android:id="@+id/no_record_text"
+            android:id="@+id/no_folder_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_margin="32dp"
-            android:text="@string/no_records_text"
+            android:text="@string/no_folders_text"
             android:textColor="@color/black"
             android:textSize="18sp"/>
 
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_note_button"
+        android:id="@+id/add_folder_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -48,7 +48,7 @@
         android:backgroundTint="?attr/colorPrimary"
         android:clickable="true"
         android:focusable="true"
-        android:contentDescription="@string/add_record_button_description"
+        android:contentDescription="@string/add_folder_button_description"
         android:tintMode="?attr/colorOnPrimary"
         android:src="@drawable/add_note_icon"
         app:fabSize="normal"

@@ -1,6 +1,5 @@
-package com.example.noteapp.presentation
+package com.example.noteapp.presentation.adapters
 
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -11,7 +10,7 @@ import com.example.noteapp.entity.Note
 
 class NoteAdapter(
     private val onClick: (Note?) -> Unit
-) : ListAdapter<Note, NoteHolder>(DiffUtilCallback()) {
+) : ListAdapter<Note, NoteHolder>(NotesDiffUtilCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder {
         val binding = RecordCardBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -39,7 +38,7 @@ class NoteAdapter(
     }
 }
 
-class DiffUtilCallback : DiffUtil.ItemCallback<Note>() {
+class NotesDiffUtilCallback : DiffUtil.ItemCallback<Note>() {
     override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean =
         oldItem.id == newItem.id
 

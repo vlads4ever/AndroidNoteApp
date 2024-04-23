@@ -8,18 +8,18 @@
         android:id="@+id/yellow_radio_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Yellow"
+        android:text="@string/yellow_text"
         android:checked="true"/>
 
     <RadioButton
         android:id="@+id/green_radio_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Green" />
+        android:text="@string/green_text" />
 
     <RadioButton
         android:id="@+id/blue_radio_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Blue" />
+        android:text="@string/blue_text" />
 </RadioGroup>
