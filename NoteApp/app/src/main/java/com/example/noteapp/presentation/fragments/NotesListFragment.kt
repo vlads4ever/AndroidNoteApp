@@ -1,6 +1,5 @@
 package com.example.noteapp.presentation.fragments
 
-import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,12 +15,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.noteapp.R
 import com.example.noteapp.databinding.FragmentNotesListBinding
-import com.example.noteapp.databinding.NewFolderQueryBinding
 import com.example.noteapp.entity.Folder
 import com.example.noteapp.entity.Note
 import com.example.noteapp.presentation.adapters.NoteAdapter
 import com.example.noteapp.presentation.NotesViewModel
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -117,62 +114,9 @@ class NotesListFragment : Fragment(), MenuProvider, SearchView.OnQueryTextListen
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean =
         when(menuItem.itemId) {
-            R.id.menu_delete -> {
-                deleteCurrentFolder()
-                false
-            }
-            R.id.menu_rename_folder -> {
-                renameCurrentFolder()
-                false
-            }
             R.id.menu_search -> true
             else -> true
         }
-
-    private fun renameCurrentFolder() {
-        AlertDialog.Builder(requireContext()).apply {
-            setTitle(getString(R.string.enter_folder_title))
-            val folderBinding = NewFolderQueryBinding.inflate(layoutInflater)
-            setView(folderBinding.root)
-            folderBinding.folderName.setText(currentFolder.folderTitle)
-            setPositiveButton(getString(R.string.button_confirm_text)) { _, _ ->
-                val folderName = folderBinding.folderName.text.toString().trim()
-                if (folderName.isNotEmpty()) {
-                    val renamingFolder = Folder(currentFolder.id, folderName)
-                    viewModel.changeFolder(renamingFolder)
-                    Snackbar.make(
-                        requireView(),
-                        getString(R.string.notification_saved_folder),
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                } else {
-                    Snackbar.make(
-                        requireView(),
-                        getString(R.string.notification_no_title),
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                }
-            }
-            setNegativeButton(getString(R.string.button_cancel_text), null)
-        }.create().show()
-    }
-
-    private fun deleteCurrentFolder() {
-        AlertDialog.Builder(requireContext()).apply {
-            setTitle(getString(R.string.notification_folder_delete_title))
-            setMessage(getString(R.string.notification_delete_body))
-            setPositiveButton(getString(R.string.button_delete_text)) { _, _ ->
-                viewModel.deleteFolder(currentFolder)
-                Snackbar.make(
-                    requireView(),
-                    getString(R.string.notification_delete_folder),
-                    Snackbar.LENGTH_SHORT
-                ).show()
-                findNavController().navigate(R.id.action_notesListFragment_to_foldersListFragment)
-            }
-            setNegativeButton(getString(R.string.button_cancel_text), null)
-        }.create().show()
-    }
 
     override fun onQueryTextSubmit(query: String?): Boolean = false
 

@@ -100,7 +100,11 @@ class FoldersListFragment : Fragment(), MenuProvider, SearchView.OnQueryTextList
     }
 
     private fun prepareRecyclerViewAdapter() {
-        folderAdapter = FolderAdapter { folder -> onItemClick(folder!!) }
+        folderAdapter = FolderAdapter (
+            { folder -> onItemClick(folder!!) },
+            { folder -> onDeleteItem(folder!!) },
+            { folder -> onRenameFolder(folder!!) }
+        )
         with (binding.foldersRecyclerView) {
             adapter = folderAdapter
             layoutManager = LinearLayoutManager(
@@ -117,6 +121,50 @@ class FoldersListFragment : Fragment(), MenuProvider, SearchView.OnQueryTextList
         }
         findNavController()
             .navigate(R.id.action_foldersListFragment_to_notesListFragment, bundle)
+    }
+
+    private fun onDeleteItem(item: Folder) {
+        AlertDialog.Builder(requireContext()).apply {
+            setTitle(getString(R.string.notification_folder_delete_title))
+            setMessage(getString(R.string.notification_delete_body))
+            setPositiveButton(getString(R.string.button_delete_text)) { _, _ ->
+                viewModel.deleteFolder(item)
+                Snackbar.make(
+                    requireView(),
+                    getString(R.string.notification_delete_folder),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+            setNegativeButton(getString(R.string.button_cancel_text), null)
+        }.create().show()
+    }
+
+    private fun onRenameFolder(item: Folder) {
+        AlertDialog.Builder(requireContext()).apply {
+            setTitle(getString(R.string.enter_folder_title))
+            val folderBinding = NewFolderQueryBinding.inflate(layoutInflater)
+            setView(folderBinding.root)
+            folderBinding.folderName.setText(item.folderTitle)
+            setPositiveButton(getString(R.string.button_confirm_text)) { _, _ ->
+                val folderName = folderBinding.folderName.text.toString().trim()
+                if (folderName.isNotEmpty()) {
+                    val renamingFolder = Folder(item.id, folderName)
+                    viewModel.changeFolder(renamingFolder)
+                    Snackbar.make(
+                        requireView(),
+                        getString(R.string.notification_saved_folder),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                } else {
+                    Snackbar.make(
+                        requireView(),
+                        getString(R.string.notification_no_title),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            setNegativeButton(getString(R.string.button_cancel_text), null)
+        }.create().show()
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

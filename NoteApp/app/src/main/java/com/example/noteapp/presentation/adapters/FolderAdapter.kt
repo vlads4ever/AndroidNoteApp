@@ -9,7 +9,9 @@ import com.example.noteapp.databinding.FolderCardBinding
 import com.example.noteapp.entity.Folder
 
 class FolderAdapter(
-    private val onClick: (Folder?) -> Unit
+    private val onClick: (Folder?) -> Unit,
+    private val onDelete: (Folder?) -> Unit,
+    private val onRename: (Folder?) -> Unit
 ) : ListAdapter<Folder, FolderHolder>(FoldersDiffUtilCallback()){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FolderHolder {
         val binding = FolderCardBinding.inflate(
@@ -28,6 +30,18 @@ class FolderAdapter(
         holder.binding.root.setOnClickListener {
             currentFolder?.let {
                 onClick(currentFolder)
+            }
+        }
+
+        holder.binding.deleteFolderButton.setOnClickListener {
+            currentFolder?.let {
+                onDelete(currentFolder)
+            }
+        }
+
+        holder.binding.renameFolderButton.setOnClickListener {
+            currentFolder?.let {
+                onRename(currentFolder)
             }
         }
     }

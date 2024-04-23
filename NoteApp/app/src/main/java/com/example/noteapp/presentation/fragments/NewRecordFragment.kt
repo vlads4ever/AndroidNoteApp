@@ -54,6 +54,10 @@ class NewRecordFragment : Fragment(), MenuProvider {
         binding.colorButton.setOnClickListener {
             prepareColorChangeDialog()
         }
+
+        binding.saveNoteButton.setOnClickListener {
+            saveNote()
+        }
     }
 
     override fun onDestroyView() {
@@ -88,13 +92,7 @@ class NewRecordFragment : Fragment(), MenuProvider {
         menuInflater.inflate(R.menu.new_record_menu, menu)
     }
 
-    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        if (menuItem.itemId == R.id.menu_save) {
-            saveNote()
-            return true
-        }
-        return false
-    }
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean = false
 
     private fun saveNote() {
         val noteTitle = binding.recordTitle.text.toString().trim()
