@@ -12,17 +12,19 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        /*
         notesDatabase = Room.inMemoryDatabaseBuilder(
             this,
             NotesDatabase::class.java
             )
             .fallbackToDestructiveMigration()
             .build()
+         */
 
-//        notesDatabase = Room.databaseBuilder(
-//            applicationContext,
-//            NotesDatabase::class.java,
-//            "notesDataBase"
-//        ).build()
+        notesDatabase = Room.databaseBuilder(
+            applicationContext,
+            NotesDatabase::class.java,
+            "notesDataBase"
+        ).build()
     }
 }
